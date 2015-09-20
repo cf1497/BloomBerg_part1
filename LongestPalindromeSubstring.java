@@ -4,10 +4,11 @@ public class LongestPalindromeSubstring {
 
 	public static void main(String[] args){
 		String s = "dabac";
-		System.out.println(getPalindrome(s));
+		System.out.println(getPalindromeII(s));
 		
 	}
 	
+	//method 1 : Using '#', O(n)
 	public static String getPalindrome(String s){ 
 		
 		if(s==null || s.length()==0){
@@ -36,4 +37,64 @@ public class LongestPalindromeSubstring {
 			return s.charAt(i/2);
 		}
 	}
+	
+	//method2: O(n^2)
+	
+	public static String getPalindromeII(String s){
+		
+		if(s==null || s.length()==0){
+			return s;	
+		}
+		
+		String result = "";
+		
+		for(int i=0; i<s.length(); i++){
+			String cur = helper(s,i,i);
+			if(cur.length()>result.length()){
+				result = cur;
+			}
+			
+			cur = helper(s,i,i+1);
+			if(cur.length()>result.length()){
+				result = cur;
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	public static String helper(String s, int start, int end){
+		
+		while(start>=0 && end<s.length() && s.charAt(start)==s.charAt(end)){
+			start--;
+			end++;
+		}
+		
+		return s.substring(start+1, end);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
