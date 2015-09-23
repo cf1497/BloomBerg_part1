@@ -5,7 +5,7 @@ public class MissingNumber {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] nums = {0,1,2,3,5};
-		System.out.println(missingNumberBit(nums));
+		System.out.println(missingNumberBinarySearch(nums));
 
 	}
 	
@@ -59,5 +59,53 @@ public class MissingNumber {
 		}
 		return result;
 	}
+	
+	// array is sorted, using binary-search
+	public static int missingNumberBinarySearch(int[] nums){
+		
+		return binaryS(nums,0,nums.length-1);
+		
+	}
+	
+	public static int binaryS(int[] nums, int start, int end){
+		if(start>=end){
+			return -1;
+		}
+		
+		int mid = (start+end)/2;
+		if(nums[mid+1]-nums[mid]==2){
+			return nums[mid]+1;
+		}
+		
+		int result = 0;
+		result = binaryS(nums,start,mid-1);
+		if(result==-1){
+			result = binaryS(nums,mid+1,end);
+		}
+		
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
